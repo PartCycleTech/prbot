@@ -7,6 +7,10 @@ defmodule Prbot.Router do
   plug :match
   plug :dispatch
 
+  get "/hello" do
+    send_resp(conn, 200, "hi, there")
+  end
+
   post "/webhook" do
     send_resp(conn, 200, "hello")
   end
