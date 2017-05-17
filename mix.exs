@@ -17,6 +17,7 @@ defmodule Prbot.Mixfile do
     # Specify extra applications you'll use from Erlang/Elixir
     [
       mod: {Prbot, []},
+      applications: [:tentacat],
       extra_applications: [:logger]
     ]
   end
@@ -33,7 +34,7 @@ defmodule Prbot.Mixfile do
   defp deps do
     [
       { :slack, "~> 0.10.0" },
-      { :tentacat, "~> 0.5" },
+      { :tentacat, "~> 0.6.2" },
       { :envy, "~> 1.1.1" }
     ]
   end

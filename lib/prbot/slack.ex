@@ -6,7 +6,6 @@ defmodule Prbot.Slack do
     {:ok, state}
   end
 
-  # Ping
   def handle_event(message = %{type: "message"}, slack, state) do
     if Regex.run ~r/<@#{slack.me.id}>:?\sping/, message.text do
       ping(message, slack)
