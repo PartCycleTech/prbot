@@ -2,13 +2,21 @@ defmodule Prbot do
   use Application
 
   def start(_type, _args) do
+    import Supervisor.Spec
+
     unless Mix.env == :prod do
       Envy.auto_load
     end
 
-    IO.puts System.get_env("SLACK_TOKEN")
     IO.puts "running"
-    children = [ Plug.Adapters.Cowboy.child_spec(:http, Prbot.Router, [], port: 4000) ]
-    Supervisor.start_link(children, strategy: :one_for_one)
+    slack_token = System.get_env("SLACK_TOKEN")
+    IO.puts slack_token
+
+    children = [
+      worker(Slack.Bot, [Prbot.Slack, [], slack_token])
+    ]
+
+    opts = [strategy: :one_for_one, name: Prbot.Supervisor]
+    Supervisor.start_link(children, opts)
   end
 end
