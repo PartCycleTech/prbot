@@ -33,7 +33,8 @@ defmodule Prbot.Mixfile do
   defp deps do
     [
       { :cowboy, "~> 1.0.0" },
-      { :plug, "~> 1.0" }
+      { :plug, "~> 1.0" },
+      { :slack, "~> 0.11.0" }
     ]
   end
 end
