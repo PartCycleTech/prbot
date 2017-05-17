@@ -34,7 +34,9 @@ defmodule Prbot.Mixfile do
     [
       { :cowboy, "~> 1.0.0" },
       { :plug, "~> 1.0" },
-      { :slack, "~> 0.11.0" }
+      { :slack, "~> 0.11.0" },
+      { :tentacat, "~> 0.5" },
+      { :exfirebase, "~> 0.4.0" }
     ]
   end
 end
