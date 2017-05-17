@@ -36,7 +36,8 @@ defmodule Prbot.Mixfile do
       { :plug, "~> 1.0" },
       { :slack, "~> 0.11.0" },
       { :tentacat, "~> 0.5" },
-      { :exfirebase, "~> 0.4.0" }
+      { :exfirebase, "~> 0.4.0" },
+      { :envy, "~> 1.1.1" }
     ]
   end
 end
