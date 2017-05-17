@@ -6,17 +6,31 @@ defmodule Prbot.Slack do
     {:ok, state}
   end
 
-  def handle_message(message = %{type: "message"}, slack, state) do
-    IO.puts "handling message"
+  # Ping
+  def handle_event(message = %{type: "message"}, slack, state) do
     if Regex.run ~r/<@#{slack.me.id}>:?\sping/, message.text do
-      send_message("<@#{message.user} pong", message.channel, slack)
+      ping(message, slack)
+    end
+
+    if Regex.run ~r/<@#{slack.me.id}>:?\sreview/, message.text do
+      review(message, slack)
     end
 
     {:ok, state}
   end
 
-  def handle_message(_message, _slack, state) do
-    IO.puts "handling unidentified message"
+  def handle_event(_message, _slack, state) do
     {:ok, state}
+  end
+
+  def ping(message, slack) do
+    IO.puts "ping"
+    send_message("<@#{message.user}> pong", message.channel, slack)
+    IO.puts "pong"
+  end
+
+  def review(message, slack) do
+    IO.puts message.text
+    send_message(":nerd_face:", message.channel, slack)
   end
 end
