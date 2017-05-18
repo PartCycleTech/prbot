@@ -19,6 +19,10 @@ defmodule Prbot.Github do
     Tentacat.Pulls.Reviews.list "PartCycleTech", "prbot", prNumber, client
   end
 
+  def getReviewsWithoutComments(prNumber) do
+    Enum.filter(getReviews(prNumber), fn(review) -> review["state"] != "COMMENTED" end)
+  end
+
   def getReviewRequests(prNumber) do
     Tentacat.Pulls.ReviewRequests.list "PartCycleTech", "partcycle-backend", prNumber, client
   end
@@ -32,7 +36,7 @@ defmodule Prbot.Github do
   end
 
   def getLatestReviews(prNumber) do
-    reviewsOldestFirst = Prbot.Github.getReviews(prNumber)
+    reviewsOldestFirst = Prbot.Github.getReviewsWithoutComments(prNumber)
     reviewsNewestFirst = Enum.reverse(reviewsOldestFirst)
     Enum.uniq_by(reviewsNewestFirst, fn review -> review["user"]["login"] end)
   end
@@ -48,8 +52,6 @@ defmodule Prbot.Github do
         "APPROVED"
       Enum.any?(getStatusOfLatestReviews(prNumber), fn(status) -> status == "CHANGES_REQUESTED" end) ->
         "CHANGES_REQUESTED"
-      Enum.any?(getStatusOfLatestReviews(prNumber), fn(status) -> status == "COMMENTED" end) ->
-        "COMMENTED"
       true ->
         "PENDING"
     end
