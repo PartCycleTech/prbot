@@ -8,7 +8,7 @@ defmodule Prbot do
       Envy.auto_load
     end
 
-    IO.puts "running"
+    IO.puts "BUTTS BUTTS BUTTS BUTTS BUTTS BUTTS"
     slack_token = System.get_env("SLACK_TOKEN")
     IO.puts slack_token
 
