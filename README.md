@@ -4,9 +4,14 @@
 
 # Usage
 
-Install dependencies with `mix deps.get`.
+Install dependencies:
+`$ mix deps.get`
 
-Run `mix run --no-halt` to start the bot.
+Start the bot.
+`$ mix run --no-halt`
+
+Interactive REPL with your app context:
+`$ iex -S mix`
 
 ## Installation
 
